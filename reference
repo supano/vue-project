@@ -1,0 +1,20 @@
+#color
+
+Gold
+#cda34f
+
+Daisy
+#e9e7da
+
+Stem
+#636b46
+
+Greenery
+#373f27
+
+
+น้ำตาลเข้มไล่เฉด
+linear-gradient(to right bottom, rgb(149, 140, 131) 0%, rgb(96, 89, 82) 100%) 100% center no-repeat
+
+น้ำตาลต้นไม้ไล่เฉด
+linear-gradient(to right bottom, rgb(179, 138, 102) 0%, rgb(119, 87, 60) 100%) 100% center no-repeat
