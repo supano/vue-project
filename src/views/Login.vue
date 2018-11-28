@@ -1,5 +1,5 @@
 <template>
-    <div id="login-wrapper">
+    <div id="login-wrapper" class="page">
         <div class="container">
             <div class="columns">
                 <div class="column" id="login-left-panel">
@@ -8,12 +8,12 @@
 
                     <div class="form-input">
                         <label for="email">Email Address</label>
-                        <input type="text" name="email" id="email">
+                        <input type="text" name="email" id="email" v-model="email">
                     </div>
 
                     <div class="form-input">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password">
+                        <input type="password" name="password" id="password" v-model="password">
                     </div>
 
                     <div class="columns">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div id="btn-group">
-                        <button id="login-btn">
+                        <button id="login-btn" @click="login">
                             Login
                         </button>
                         <button id="back-btn">
@@ -39,7 +39,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="column" id="login-right-panel">
+                <div class="column is-three-fifths" id="login-right-panel">
 
                 </div>
             </div>
@@ -48,18 +48,47 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'login'
+    name: 'login',
+    data: function () {
+        return {
+            'email': '',
+            'password': ''
+        }
+    },
+    methods: {
+        login: function () {
+            console.log('hello world')
+            console.log(this.email)
+            console.log(this.password)
+
+            axios({
+                method: 'POST',
+                url: 'http://localhost:1323/api/login',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                data: {
+                    email: this.email,
+                    password: this.password
+                }
+            }).then(res => {
+                console.log('res', res)
+            })
+        }
+    }
 }
 </script>
 
 <style scoped>
 
     #login-wrapper {
-    display: flex;
-    align-items: center;
-    height: calc(100% - 7.5em);
-    width: 100%;
+        display: flex;
+        align-items: center;
+        height: calc(100% - 7.5em);
+        width: 100%;
     }
 
     #login-header {
@@ -76,6 +105,7 @@ export default {
         background-color: white;
         box-shadow: 5px 5px #3333;
         min-height: 70%;
+        height: 600px;
     }
 
     #login-wrapper > .container > .column {
@@ -83,7 +113,7 @@ export default {
     }
 
     .form-input {
-        width: 70%;
+        width: 95%;
         border: 2px solid rgb(241, 241, 241);
         background-color: white;
         border-radius: 3px;
@@ -146,17 +176,13 @@ export default {
         font-weight: 600;
     }
 
-    button:hover {
-        /* box-shadow: 5px 5px #3333; */
-    }
-
     #login-left-panel {
         padding: 50px;
         background-color: #FCFCFC;
     }
 
     #login-right-panel {
-        background-image: url('../assets/botanical-cactus-close-up-305821.jpg');
+        background-image: url('../assets/login-panel-image.webp');
         background-repeat: no-repeat;
         background-size: cover;
     }
